@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Atelier Nieruchomości — ekskluzywne biuro nieruchomości. Rezydencje, apartamenty i domy wybrane, nie znalezione.">
+<title>Atelier Nieruchomości — Wybrane, nie znalezione</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+/* ---------------------------------------------------------------
+   ATELIER — dark luxury one-page
+   Paleta:  tło #0e0d0b (antracyt-czerń) · tekst #eae5dc (offwhite)
+            akcent #a8895a (stonowany mosiądz)
+   --------------------------------------------------------------- */
+
+:root{
+  --bg:        #0e0d0b;
+  --bg-raised: #14130f;
+  --ink:       #eae5dc;
+  --ink-dim:   #9c968a;
+  --brass:     #a8895a;
+  --line:      rgba(234,229,220,.12);
+  --serif: "Cormorant Garamond", Georgia, serif;
+  --sans:  "Inter", -apple-system, sans-serif;
+  --ease:  cubic-bezier(.25,.1,.25,1);
+}
+
+*,*::before,*::after{ margin:0; padding:0; box-sizing:border-box; }
+
+html{ scroll-behavior:smooth; }
+
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior:auto; }
+  *,*::before,*::after{ animation:none !important; transition:none !important; }
+}
+
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-weight:300;
+  font-size:1rem;
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+}
+
+img{ display:block; max-width:100%; }
+
+a{ color:inherit; text-decoration:none; }
+
+::selection{ background:var(--brass); color:var(--bg); }
+
+/* ----- typografia pomocnicza ----- */
+
+.label{
+  font-family:var(--sans);
+  font-size:.6875rem;
+  font-weight:400;
+  letter-spacing:.32em;
+  text-transform:uppercase;
+  color:var(--brass);
+}
+
+h1,h2,h3{
+  font-family:var(--serif);
+  font-weight:300;
+  letter-spacing:.02em;
+  line-height:1.15;
+}
+
+/* ----- layout ----- */
+
+.wrap{
+  width:min(1200px, 100% - 3rem);
+  margin-inline:auto;
+}
+
+section{
+  padding-block:6rem;
+}
+
+@media (min-width:768px){
+  section{ padding-block:9rem; }
+}
+
+/* ----- fade-in przy scrollu ----- */
+
+.reveal{
+  opacity:0;
+  transform:translateY(28px);
+  transition:opacity 1.1s var(--ease), transform 1.1s var(--ease);
+}
+.reveal.is-visible{
+  opacity:1;
+  transform:none;
+}
+.reveal[data-delay="1"]{ transition-delay:.15s; }
+.reveal[data-delay="2"]{ transition-delay:.3s; }
+.reveal[data-delay="3"]{ transition-delay:.45s; }
+
+/* =========================================================
+   NAV
+   ========================================================= */
+
+.nav{
+  position:fixed;
+  inset:0 0 auto 0;
+  z-index:100;
+  padding-block:1.4rem;
+  transition:background .5s var(--ease), padding .5s var(--ease), border-color .5s var(--ease);
+  border-bottom:1px solid transparent;
+}
+.nav.is-scrolled{
+  background:rgba(14,13,11,.88);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  border-bottom-color:var(--line);
+  padding-block:1rem;
+}
+.nav .wrap{
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+}
+.nav-brand{
+  font-family:var(--serif);
+  font-size:1.05rem;
+  letter-spacing:.28em;
+  text-transform:uppercase;
+}
+.nav-links{
+  display:flex;
+  gap:2.2rem;
+  list-style:none;
+}
+.nav-links a{
+  font-size:.6875rem;
+  letter-spacing:.24em;
+  text-transform:uppercase;
+  color:var(--ink-dim);
+  transition:color .35s var(--ease);
+}
+.nav-links a:hover,
+.nav-links a:focus-visible{ color:var(--brass); }
+
+@media (max-width:640px){
+  .nav-links li:not(:last-child){ display:none; }
+}
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.hero{
+  position:relative;
+  min-height:100svh;
+  display:flex;
+  align-items:flex-end;
+  padding-block:0;
+  overflow:hidden;
+  isolation:isolate;
+}
+.hero-media{
+  position:absolute;
+  inset:-12% 0;
+  z-index:-1;
+  will-change:transform;
+}
+.hero-media img{
+  width:100%; height:100%;
+  object-fit:cover;
+  filter:brightness(.55) saturate(.75);
+}
+.hero-media::after{
+  content:"";
+  position:absolute; inset:0;
+  background:linear-gradient(to top, var(--bg) 0%, rgba(14,13,11,.35) 45%, rgba(14,13,11,.55) 100%);
+}
+.hero-inner{
+  width:min(1200px, 100% - 3rem);
+  margin-inline:auto;
+  padding-block:8rem 6rem;
+}
+.hero .label{
+  display:block;
+  margin-bottom:1.6rem;
+}
+.hero h1{
+  font-size:clamp(2.8rem, 8vw, 6.5rem);
+  max-width:12ch;
+}
+.hero-tagline{
+  margin-top:2rem;
+  max-width:34ch;
+  color:var(--ink-dim);
+  font-size:.9375rem;
+  letter-spacing:.04em;
+}
+.hero-scroll{
+  position:absolute;
+  right:2rem; bottom:2.4rem;
+  display:flex;
+  align-items:center;
+  gap:.9rem;
+  font-size:.625rem;
+  letter-spacing:.3em;
+  text-transform:uppercase;
+  color:var(--ink-dim);
+  writing-mode:vertical-rl;
+}
+.hero-scroll::after{
+  content:"";
+  width:1px; height:56px;
+  background:var(--brass);
+}
+@media (max-width:640px){
+  .hero-scroll{ display:none; }
+}
+
+/* =========================================================
+   O NAS
+   ========================================================= */
+
+.about .wrap{
+  display:grid;
+  gap:3.5rem;
+}
+@media (min-width:900px){
+  .about .wrap{
+    grid-template-columns: 5fr 4fr;
+    gap:6rem;
+    align-items:center;
+  }
+}
+.about h2{
+  font-size:clamp(1.9rem, 4vw, 3rem);
+  margin-block:1.4rem 1.8rem;
+  max-width:20ch;
+}
+.about p{
+  color:var(--ink-dim);
+  max-width:52ch;
+}
+.about-stat{
+  border-left:1px solid var(--brass);
+  padding-left:2.4rem;
+}
+.about-stat strong{
+  display:block;
+  font-family:var(--serif);
+  font-weight:300;
+  font-size:clamp(4rem, 9vw, 6.5rem);
+  line-height:1;
+  color:var(--ink);
+}
+.about-stat span{
+  display:block;
+  margin-top:1rem;
+  font-size:.6875rem;
+  letter-spacing:.28em;
+  text-transform:uppercase;
+  color:var(--ink-dim);
+  max-width:22ch;
+}
+
+/* =========================================================
+   NIERUCHOMOŚCI
+   ========================================================= */
+
+.estates{ background:var(--bg-raised); }
+
+.estates-head{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:baseline;
+  justify-content:space-between;
+  gap:1rem;
+  margin-bottom:4rem;
+}
+.estates-head h2{
+  font-size:clamp(1.9rem, 4vw, 3rem);
+  margin-top:1.2rem;
+}
+
+.estates-grid{
+  display:grid;
+  gap:3rem;
+}
+@media (min-width:768px){
+  .estates-grid{
+    grid-template-columns:repeat(3, 1fr);
+    gap:2rem;
+  }
+}
+
+.estate{ display:block; }
+.estate-media{
+  position:relative;
+  aspect-ratio:4/5;
+  overflow:hidden;
+  background:#1a1813;
+}
+.estate-media img{
+  width:100%; height:100%;
+  object-fit:cover;
+  filter:saturate(.8);
+  transition:transform 1.2s var(--ease), filter .6s var(--ease);
+}
+.estate-media::after{
+  content:"";
+  position:absolute; inset:0;
+  background:rgba(14,13,11,0);
+  transition:background .6s var(--ease);
+}
+.estate:hover .estate-media img,
+.estate:focus-visible .estate-media img{
+  transform:scale(1.04);
+}
+.estate:hover .estate-media::after,
+.estate:focus-visible .estate-media::after{
+  background:rgba(14,13,11,.32);
+}
+.estate-meta{
+  padding-top:1.6rem;
+  border-top:1px solid var(--line);
+  margin-top:0;
+  display:flex;
+  flex-direction:column;
+  gap:.35rem;
+}
+.estate h3{
+  font-size:1.4rem;
+  order:2;
+}
+.estate-meta .label{ order:1; font-size:.625rem; }
+.estate-details{
+  order:3;
+  display:flex;
+  gap:1.4rem;
+  margin-top:.6rem;
+  font-size:.8125rem;
+  color:var(--ink-dim);
+  letter-spacing:.06em;
+}
+.estate-details em{
+  font-style:normal;
+  color:var(--brass);
+}
+
+/* =========================================================
+   PROCES
+   ========================================================= */
+
+.process h2{
+  font-size:clamp(1.9rem, 4vw, 3rem);
+  margin-top:1.2rem;
+  margin-bottom:4.5rem;
+  max-width:18ch;
+}
+.process ol{
+  list-style:none;
+  display:grid;
+  gap:0;
+  counter-reset:step;
+}
+@media (min-width:900px){
+  .process ol{ grid-template-columns:repeat(4, 1fr); }
+}
+.process li{
+  counter-increment:step;
+  border-top:1px solid var(--line);
+  padding:2rem 2rem 2rem 0;
+}
+@media (min-width:900px){
+  .process li{
+    border-top:1px solid var(--line);
+    padding:2.4rem 2.4rem 0 0;
+  }
+}
+.process li::before{
+  content:"0" counter(step);
+  display:block;
+  font-family:var(--serif);
+  font-size:1.1rem;
+  color:var(--brass);
+  letter-spacing:.14em;
+  margin-bottom:1.2rem;
+}
+.process h3{
+  font-size:1.25rem;
+  margin-bottom:.8rem;
+}
+.process p{
+  font-size:.875rem;
+  color:var(--ink-dim);
+  max-width:30ch;
+}
+
+/* =========================================================
+   KONTAKT
+   ========================================================= */
+
+.contact{ background:var(--bg-raised); }
+
+.contact .wrap{
+  display:grid;
+  gap:4rem;
+}
+@media (min-width:900px){
+  .contact .wrap{
+    grid-template-columns:4fr 5fr;
+    gap:7rem;
+  }
+}
+.contact h2{
+  font-size:clamp(1.9rem, 4vw, 3rem);
+  margin-block:1.4rem 2.2rem;
+  max-width:14ch;
+}
+.contact-info{
+  display:grid;
+  gap:1.8rem;
+  font-size:.875rem;
+  color:var(--ink-dim);
+}
+.contact-info a{
+  color:var(--ink);
+  border-bottom:1px solid var(--line);
+  padding-bottom:2px;
+  transition:border-color .35s var(--ease), color .35s var(--ease);
+}
+.contact-info a:hover,
+.contact-info a:focus-visible{
+  color:var(--brass);
+  border-color:var(--brass);
+}
+.contact-info .label{ display:block; margin-bottom:.4rem; }
+
+.form{ display:grid; gap:2.6rem; }
+.field{ position:relative; }
+.field label{
+  display:block;
+  font-size:.6875rem;
+  letter-spacing:.28em;
+  text-transform:uppercase;
+  color:var(--ink-dim);
+  margin-bottom:.7rem;
+}
+.field input,
+.field textarea{
+  width:100%;
+  background:transparent;
+  border:0;
+  border-bottom:1px solid var(--line);
+  padding:.6rem 0;
+  font-family:var(--sans);
+  font-weight:300;
+  font-size:1rem;
+  color:var(--ink);
+  transition:border-color .4s var(--ease);
+}
+.field textarea{ resize:vertical; min-height:96px; }
+.field input:focus,
+.field textarea:focus{
+  outline:none;
+  border-bottom-color:var(--brass);
+}
+.form button{
+  justify-self:start;
+  background:transparent;
+  border:1px solid var(--brass);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-size:.6875rem;
+  font-weight:400;
+  letter-spacing:.3em;
+  text-transform:uppercase;
+  padding:1.1rem 2.8rem;
+  cursor:pointer;
+  transition:background .45s var(--ease), color .45s var(--ease);
+}
+.form button:hover,
+.form button:focus-visible{
+  background:var(--brass);
+  color:var(--bg);
+}
+.form-note{
+  font-size:.8125rem;
+  color:var(--brass);
+  min-height:1.2em;
+}
+
+/* =========================================================
+   STOPKA
+   ========================================================= */
+
+.footer{
+  border-top:1px solid var(--line);
+  padding-block:2rem;
+}
+.footer .wrap{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:space-between;
+  gap:.8rem;
+  font-size:.6875rem;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--ink-dim);
+}
+</style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a class="nav-brand" href="#top" aria-label="Atelier Nieruchomości — początek strony">Atelier</a>
+    <nav aria-label="Nawigacja główna">
+      <ul class="nav-links">
+        <li><a href="#o-nas">O nas</a></li>
+        <li><a href="#nieruchomosci">Nieruchomości</a></li>
+        <li><a href="#proces">Proces</a></li>
+        <li><a href="#kontakt">Kontakt</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" aria-label="Wprowadzenie">
+    <div class="hero-media" id="heroMedia" aria-hidden="true">
+      <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=2000&q=75"
+           alt="" fetchpriority="high">
+    </div>
+    <div class="hero-inner">
+      <span class="label reveal">Ekskluzywne biuro nieruchomości</span>
+      <h1 class="reveal" data-delay="1">Nieruchomości wybrane, nie&nbsp;znalezione.</h1>
+      <p class="hero-tagline reveal" data-delay="2">
+        Reprezentujemy domy i apartamenty, które rzadko trafiają na rynek —
+        i klientów, którzy wiedzą dlaczego.
+      </p>
+    </div>
+    <span class="hero-scroll" aria-hidden="true">Przewiń</span>
+  </section>
+
+  <!-- ===== O NAS ===== -->
+  <section class="about" id="o-nas">
+    <div class="wrap">
+      <div class="reveal">
+        <span class="label">O nas</span>
+        <h2>Dyskrecja jest naszą walutą.</h2>
+        <p>
+          Atelier powstało z przekonania, że wyjątkowe nieruchomości zasługują na
+          wyjątkową reprezentację. Nie prowadzimy katalogu — prowadzimy rozmowy.
+          Każdy dom, który przyjmujemy, znamy osobiście; każdego klienta,
+          któremu go pokazujemy, rozumiemy na tyle, by wiedzieć, że to spotkanie
+          ma sens.
+        </p>
+      </div>
+      <div class="about-stat reveal" data-delay="1">
+        <strong>17</strong>
+        <span>lat na rynku nieruchomości premium</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== NIERUCHOMOŚCI ===== -->
+  <section class="estates" id="nieruchomosci">
+    <div class="wrap">
+      <div class="estates-head reveal">
+        <div>
+          <span class="label">Portfolio</span>
+          <h2>Wyróżnione nieruchomości</h2>
+        </div>
+      </div>
+      <div class="estates-grid">
+
+        <article class="estate reveal" data-delay="1">
+          <div class="estate-media">
+            <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=75"
+                 alt="Nowoczesna willa z podświetlonym basenem o zmierzchu" loading="lazy">
+          </div>
+          <div class="estate-meta">
+            <span class="label">Konstancin-Jeziorna</span>
+            <h3>Rezydencja przy parku</h3>
+            <p class="estate-details"><span>420 m²</span><em>12 500 000 zł</em></p>
+          </div>
+        </article>
+
+        <article class="estate reveal" data-delay="2">
+          <div class="estate-media">
+            <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=75"
+                 alt="Przestronny salon z podwójną wysokością i dużymi przeszkleniami" loading="lazy">
+          </div>
+          <div class="estate-meta">
+            <span class="label">Warszawa · Powiśle</span>
+            <h3>Apartament nad Wisłą</h3>
+            <p class="estate-details"><span>186 m²</span><em>6 900 000 zł</em></p>
+          </div>
+        </article>
+
+        <article class="estate reveal" data-delay="3">
+          <div class="estate-media">
+            <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1200&q=75"
+                 alt="Minimalistyczny dom z tarasem i widokiem na ogród" loading="lazy">
+          </div>
+          <div class="estate-meta">
+            <span class="label">Sopot · Dolny</span>
+            <h3>Dom przy plaży</h3>
+            <p class="estate-details"><span>310 m²</span><em>9 200 000 zł</em></p>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PROCES ===== -->
+  <section class="process" id="proces">
+    <div class="wrap">
+      <div class="reveal">
+        <span class="label">Podejście</span>
+        <h2>Jak pracujemy</h2>
+      </div>
+      <ol>
+        <li class="reveal">
+          <h3>Rozmowa</h3>
+          <p>Zaczynamy od zrozumienia — czego szukasz i czego nie chcesz nigdy więcej oglądać.</p>
+        </li>
+        <li class="reveal" data-delay="1">
+          <h3>Selekcja</h3>
+          <p>Przedstawiamy trzy propozycje, nie trzydzieści. Każda z powodem.</p>
+        </li>
+        <li class="reveal" data-delay="2">
+          <h3>Negocjacje</h3>
+          <p>Prowadzimy je dyskretnie i do końca — w Twoim imieniu, na Twoich warunkach.</p>
+        </li>
+        <li class="reveal" data-delay="3">
+          <h3>Klucze</h3>
+          <p>Formalności, notariusz, przekazanie. Jesteśmy obecni do ostatniego podpisu.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ===== KONTAKT ===== -->
+  <section class="contact" id="kontakt">
+    <div class="wrap">
+      <div class="reveal">
+        <span class="label">Kontakt</span>
+        <h2>Porozmawiajmy.</h2>
+        <div class="contact-info">
+          <p>
+            <span class="label">Telefon</span>
+            <a href="tel:+48221234567">+48 22 123 45 67</a>
+          </p>
+          <p>
+            <span class="label">E-mail</span>
+            <a href="mailto:kontakt@atelier.example">kontakt@atelier.example</a>
+          </p>
+          <p>
+            <span class="label">Adres</span>
+            ul. Foksal 12, 00-366 Warszawa<br>
+            spotkania wyłącznie po umówieniu
+          </p>
+        </div>
+      </div>
+      <form class="form reveal" data-delay="1" id="contactForm" novalidate>
+        <div class="field">
+          <label for="f-name">Imię i nazwisko</label>
+          <input type="text" id="f-name" name="name" autocomplete="name" required>
+        </div>
+        <div class="field">
+          <label for="f-email">E-mail</label>
+          <input type="email" id="f-email" name="email" autocomplete="email" required>
+        </div>
+        <div class="field">
+          <label for="f-message">Wiadomość</label>
+          <textarea id="f-message" name="message" rows="4" required></textarea>
+        </div>
+        <button type="submit">Wyślij zapytanie</button>
+        <p class="form-note" id="formNote" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<!-- ===== STOPKA ===== -->
+<footer class="footer">
+  <div class="wrap">
+    <span>© 2026 Atelier Nieruchomości</span>
+    <span>Warszawa · Trójmiasto</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  var reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ----- sticky nav: tło po przewinięciu ----- */
+  var nav = document.getElementById("nav");
+  function onScrollNav(){
+    nav.classList.toggle("is-scrolled", window.scrollY > 40);
+  }
+  window.addEventListener("scroll", onScrollNav, { passive:true });
+  onScrollNav();
+
+  /* ----- fade-in przy scrollu ----- */
+  var revealed = document.querySelectorAll(".reveal");
+  if (reducedMotion || !("IntersectionObserver" in window)) {
+    revealed.forEach(function(el){ el.classList.add("is-visible"); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold:.15, rootMargin:"0px 0px -8% 0px" });
+    revealed.forEach(function(el){ io.observe(el); });
+  }
+
+  /* ----- delikatny parallax hero ----- */
+  var heroMedia = document.getElementById("heroMedia");
+  if (heroMedia && !reducedMotion) {
+    var ticking = false;
+    window.addEventListener("scroll", function(){
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(function(){
+        var y = window.scrollY;
+        if (y < window.innerHeight * 1.2) {
+          heroMedia.style.transform = "translateY(" + (y * 0.18) + "px)";
+        }
+        ticking = false;
+      });
+    }, { passive:true });
+  }
+
+  /* ----- formularz (demo, bez backendu) ----- */
+  var form = document.getElementById("contactForm");
+  var note = document.getElementById("formNote");
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    if (!form.checkValidity()) {
+      note.textContent = "Prosimy uzupełnić wszystkie pola formularza.";
+      form.querySelector(":invalid").focus();
+      return;
+    }
+    note.textContent = "Dziękujemy. Odezwiemy się w ciągu jednego dnia roboczego.";
+    form.reset();
+  });
+})();
+</script>
+
+</body>
+</html>
